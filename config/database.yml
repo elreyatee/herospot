@@ -1,0 +1,15 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: herospot_development
+  pool: 5
+  username: ellerytemple
+  password: 
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: herospot_test
+  pool: 5
+  username: ellerytemple
+  password: 

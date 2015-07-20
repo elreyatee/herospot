@@ -1,0 +1,16 @@
+%nav.navbar.navbar-inverse
+  .container-fluid
+    .navbar-header
+      %a.navbar-brand HeroSpot
+    %ul.nav.navbar-nav.navbar-right
+      %li= link_to 'Login'
+      %li= link_to 'Join'
+    = form_tag '', method: 'get', class: 'navbar-form navbar-right' do
+      .form-group
+        .input-group
+          = text_field_tag :search_term, nil, class: 'form-control search-form', placeholder: 'Search for hero ...'
+          %span.input-group-btn
+            = button_tag '', class: 'btn btn-success search-btn' do
+              %span.glyphicon.glyphicon-search
+	  
+

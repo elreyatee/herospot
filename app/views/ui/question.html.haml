@@ -1,0 +1,21 @@
+.progress
+  %div(class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%; min-width: 2em;")
+
+.img_container
+  %img(src="/tmp/cyborg-superman.jpg" alt="Cyborg-Superman" class="img-rounded")
+
+.container
+  .row
+    .col-md-8.col-md-offset-2
+      .well
+        = bootstrap_form_for "", layout: :horizontal, label_col: "col-md-2", control_col: "col-md-8" do |f|
+          = content_tag(:h2, "What is Cyborg Superman's real name?", class: "text-center")
+          %br
+          %fieldset
+            = f.form_group :answer do 
+              = f.radio_button :answer, 0, label: "Clark Kent", checked: true
+              = f.radio_button :answer, 1, label: "Hank Henshaw"
+              = f.radio_button :answer, 2, label: "Lex Luthor"
+              = f.radio_button :answer, 3, label: "John Henry Irons"
+          %fieldset.col-md-offset-2
+            = f.primary "Answer"
