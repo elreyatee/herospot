@@ -1,0 +1,13 @@
+.container
+  .row
+    .col-md-8.col-md-offset-2
+      .well
+        = bootstrap_form_for @user, url: join_path, layout: :horizontal, label_col: 'col-md-2', control_col: 'col-md-8' do |f|
+          %h2.text-center Join Us
+          %br
+          %fieldset
+            = f.text_field :full_name, label: 'Full Name', icon: 'user', placeholder: 'Full Name'
+            = f.email_field :email, label: 'Email', icon: 'envelope', placeholder: 'Email'
+            = f.password_field :password, label: 'Password', icon: 'lock', placeholder: 'Password'
+          %fieldset.col-md-offset-2
+            = f.submit 'Submit', class: 'btn btn-success'
