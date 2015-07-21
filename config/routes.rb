@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
  get 'ui(/:action)', controller: 'ui'
- root 'heroes#index'
+ root 'heros#index'
  get 'join', to: 'users#new'
  post 'join', to: 'users#create'
  get 'login', to: 'sessions#new'

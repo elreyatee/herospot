@@ -1,3 +1,3 @@
 class Category < ActiveRecord::Base
-  has_many :heroes
+  has_many :heros, ->{ order(:name) }
 end
