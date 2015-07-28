@@ -1,4 +1,4 @@
-class Follower < ActiveRecord::Base
+class Relationship < ActiveRecord::Base
   belongs_to :user
   belongs_to :hero
 end

@@ -1,19 +1,19 @@
 %nav.navbar.navbar-inverse
   .container-fluid
     .navbar-header
-      %a.navbar-brand HeroSpot
+      = link_to 'HeroSpot', root_path, class: 'navbar-brand'
     %ul.nav.navbar-nav.navbar-right
       - if logged_in?
         %li= link_to 'Logout', logout_path
       - else  
         %li= link_to 'Login', login_path
         %li= link_to 'Join', join_path
-    = form_tag '', method: 'get', class: 'navbar-form navbar-right' do
+    = form_tag search_heros_path, method: 'get', class: 'navbar-form navbar-right' do
       .form-group
         .input-group
           = text_field_tag :search_term, nil, class: 'form-control search-form', placeholder: 'Search for hero ...'
           %span.input-group-btn
-            = button_tag '', class: 'btn btn-success search-btn' do
+            = button_tag class: 'btn btn-success search-btn' do
               %span.glyphicon.glyphicon-search
 	  
 

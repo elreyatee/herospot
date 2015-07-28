@@ -1,0 +1,28 @@
+.jumbotron
+  .container-fluid
+    .row
+      %div.col-sm-6(id="img_wrapper")
+        = image_tag(@hero.large_url, alt: "#{@hero.name}")
+      %div.col-sm-6(id="char_intro")
+        %h2= "#{@hero.name}"
+        %p= "#{@hero.biography}"
+        - if logged_in?
+          = link_to 'Quiz', quiz_hero_path(@hero), class: 'btn btn-primary btn-lg'
+          = link_to 'Follow', follow_hero_path(@hero), class: 'btn btn-primary btn-lg'
+          = link_to 'Unfollow', unfollow_hero_path(@hero), class: 'btn btn-primary btn-lg' 
+
+%section.biography
+  .col-sm-8
+    %h2 Origin
+    %hr
+    %p= "#{@hero.biography}" 
+
+  .panel.panel-default.info
+    .panel-heading
+      %h3.panel-title Information
+    .panel-body
+      %p Name
+      %p Alias
+      %p Abilities
+      %p Publisher
+    

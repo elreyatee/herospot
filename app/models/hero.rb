@@ -1,7 +1,14 @@
 class Hero < ActiveRecord::Base
-  has_many :followers
-  has_many :users, through: :followers
-  belongs_to :category
   scope :sorted, ->{ order(:name) }
+
+  belongs_to :category
+  has_many :relationships
+  has_many :followers, through: :relationships, source: :user
+
   validates_presence_of :name, :publisher, :biography
+  
+  def self.search_by_name(search_term)
+    return [] if search_term.blank? 
+    where("name ILIKE ?", "%#{search_term}%")
+  end
 end

@@ -6,4 +6,16 @@ Rails.application.routes.draw do
  get 'login', to: 'sessions#new'
  post 'login', to: 'sessions#create'
  get 'logout', to: 'sessions#destroy'
+
+ resources 'heros', only: [:show] do 
+  collection do  
+    get 'search', to: 'heros#search'
+  end
+
+  member do
+    get 'quiz', to: 'heros#quiz'
+    get 'follow', to: 'heros#follow'
+    get 'unfollow', to: 'hero#unfollow'
+  end
+ end
 end
