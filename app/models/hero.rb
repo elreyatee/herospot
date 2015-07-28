@@ -3,7 +3,7 @@ class Hero < ActiveRecord::Base
 
   belongs_to :category
   has_many :relationships
-  has_many :followers, through: :relationships, source: :user
+  has_many :followers, through: :relationships, source: :user, dependent: :destroy
 
   validates_presence_of :name, :publisher, :biography
   
