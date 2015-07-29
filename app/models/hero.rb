@@ -11,4 +11,8 @@ class Hero < ActiveRecord::Base
     return [] if search_term.blank? 
     where("name ILIKE ?", "%#{search_term}%")
   end
+
+  def follower?(some_user)
+    self.followers.include?(some_user)
+  end
 end
