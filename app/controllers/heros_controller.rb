@@ -23,7 +23,7 @@ class HerosController < ApplicationController
 
   def follow
     hero = Hero.find(params[:id])
-    hero.relationships.create(user_id: current_user.id)
+    hero.relationships.create!(user_id: current_user.id)
   end
 
   def unfollow

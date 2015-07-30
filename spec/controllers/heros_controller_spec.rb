@@ -1,6 +1,8 @@
 require 'spec_helper'
 
-describe HerosController do  
+describe HerosController do 
+  let(:hero) { Fabricate(:hero) } 
+
   describe "GET index" do  
     it "should render index page" do
       get :index
@@ -10,13 +12,11 @@ describe HerosController do
 
   describe "GET search" do
     it "should set @results variable" do 
-      batman = Hero.create(name: "Batman", publisher: "DC", biography: "Dark Knight")
       get :search, search_term: "Batman"
-      expect(assigns(:results)).to eq([batman])
+      expect(assigns(:results)).to eq([hero])
     end
 
     it "should render search page" do 
-      batman = Hero.create(name: "Batman", publisher: "DC", biography: "Dark Knight")
       get :search, search_term: "Batman"
       expect(response).to render_template(:search)
     end
@@ -34,18 +34,29 @@ describe HerosController do
 
   describe "GET show" do
     it "should set @hero variable" do 
-      batman = Hero.create(name: "Batman", publisher: "DC", biography: "Dark Knight", id: 1)
-      get :show, id: 1
-      expect(assigns(:hero)).to eq(batman)
+      get :show, id: hero.id
+      expect(assigns(:hero)).to eq(hero)
     end
 
     it "should render show template" do  
-
+      get :show, id: hero.id
+      expect(response).to render_template(:show)
     end
   end
 
   describe "GET follow" do
-
+    # it "should set follower for authenticated user" do
+      
+    # end
+    # it "should find the correct hero"
+    # it "should not set user to follow hero if user is not a follower"
+    # it "should flash message if user is already a follower"
+    
+    # context "without logged in user" do
+    #   it "should not set follower if user is not logged in" do
+    #   it "should flash message to login"
+    #   it "should redirect to log in  page"
+    # end
   end
 
   describe "GET unfollow" do
