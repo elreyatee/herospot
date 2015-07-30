@@ -26,9 +26,9 @@ describe HerosController do
     end
 
     it "it should render back if search term is blank" do
-      request.env["HTTP REFERER"] = "http://localhost:3000"
+      request.env['HTTP_REFERER'] = "http://localhost:3000"
       get :search, search_term: " "
-      expect(response).to redirect_to request.env["HTTP REFERER"]
+      expect(response).to redirect_to request.env['HTTP_REFERER']
     end
   end
 

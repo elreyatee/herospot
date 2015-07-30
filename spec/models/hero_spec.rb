@@ -44,4 +44,19 @@ describe Hero do
       expect(Hero.search_by_name("")).to eq([])
     end
   end
+
+  describe "#follower?(some_user)" do 
+    it "should return true if user is a follower of hero" do 
+      bob = User.new(full_name: "Bob", email: "bob@example.com", password: "test")
+      batman = Hero.new(name: "Batman", publisher: "DC", biography: "Dark Knight")
+      batman.followers << bob
+      expect(batman.follower?(bob)).to be true
+    end
+
+    it "should return false if user is not a follow of hero" do 
+      bob = User.new(full_name: "Bob", email: "bob@example.com", password: "test")
+      batman = Hero.new(name: "Batman", publisher: "DC", biography: "Dark Knight")
+      expect(batman.follower?(bob)).to be false
+    end
+  end
 end
