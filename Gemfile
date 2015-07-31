@@ -17,7 +17,7 @@ gem 'bcrypt'
 group :development, :test do
   gem 'pry'
   gem 'pry-nav'
-  gem 'rspec-rails', '2.99'
+  gem 'rspec-rails'
   gem 'fabrication'
   gem 'faker'
   gem 'capybara'
