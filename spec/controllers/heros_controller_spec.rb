@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe HerosController do 
-  let(:hero) { Fabricate(:hero) } 
+  let(:batman) { Fabricate(:hero, name: "Batman") } 
 
   describe "GET index" do  
     it "should render index page" do
@@ -13,7 +13,7 @@ describe HerosController do
   describe "GET search" do
     it "should set @results variable" do 
       get :search, search_term: "Batman"
-      expect(assigns(:results)).to eq([hero])
+      expect(assigns(:results)).to eq([batman])
     end
 
     it "should render search page" do 
@@ -34,12 +34,12 @@ describe HerosController do
 
   describe "GET show" do
     it "should set @hero variable" do 
-      get :show, id: hero.id
-      expect(assigns(:hero)).to eq(hero)
+      get :show, id: batman.id
+      expect(assigns(:hero)).to eq(batman)
     end
 
     it "should render show template" do  
-      get :show, id: hero.id
+      get :show, id: batman.id
       expect(response).to render_template(:show)
     end
   end
