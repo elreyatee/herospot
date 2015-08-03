@@ -8,6 +8,7 @@ Rails.application.routes.draw do
  get 'logout', to: 'sessions#destroy'
 
  resources 'heros', only: [:show] do 
+  
   collection do  
     get 'search', to: 'heros#search'
   end
