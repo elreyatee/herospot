@@ -5,7 +5,7 @@
         = image_tag(@hero.large_url, alt: "#{@hero.name}")
       %div.col-sm-6(id="char_intro")
         %h2= "#{@hero.name}"
-        %p= "#{@hero.biography}"
+        %p= "#{@hero.summary}"
         - if logged_in?
           = link_to 'Quiz', quiz_hero_path(@hero), class: 'btn btn-primary btn-lg'
           - unless @hero.follower?(current_user)
@@ -22,9 +22,20 @@
   .panel.panel-default.info
     .panel-heading
       %h3.panel-title Information
-    .panel-body
-      %p Name
-      %p Alias
-      %p Abilities
-      %p Publisher
+    %ul.list-group
+      %li.list-group-item
+        %h4 Category
+        %p= "#{@hero.category.name}"
+      %li.list-group-item
+        %h4 Name
+        %p= "#{@hero.name}"
+      %li.list-group-item
+        %h4 Publisher
+        %p= "#{@hero.publisher}"
+      %li.list-group-item
+        %h4 Alias
+        - @hero.aliases.each do |another|
+          %p= "#{another.name}"
+
+
     

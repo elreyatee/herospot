@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe Hero do  
   it { should belong_to(:category) }
+  it { should have_many(:aliases)}
   it { should have_many(:followers).through(:relationships) }
   it { should validate_presence_of(:name) }
   it { should validate_presence_of(:biography) }

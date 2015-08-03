@@ -1,6 +1,7 @@
 class Hero < ActiveRecord::Base
   scope :sorted, ->{ order(:name) }
 
+  has_many :aliases
   belongs_to :category
   has_many :relationships
   has_many :followers, through: :relationships, source: :user, dependent: :destroy
@@ -17,10 +18,6 @@ class Hero < ActiveRecord::Base
   end
 
   def summary
-    # summary = self.biography.split(".")[0..4].join(".")
-    # summary = summary[0..250]
-    # summary << "..." unless summary[-1] == "."
-
     summary = self.biography.split(".")[0..4].join(".")[0..247]
     summary << "..." unless summary[-1] == "."
   end
