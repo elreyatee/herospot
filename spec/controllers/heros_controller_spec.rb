@@ -53,29 +53,33 @@ describe HerosController do
   describe "GET follow" do
     context "with authenticated user" do 
       before do 
-        session[:user_id] = aaron.id
-        batman.relationships.create(user_id: aaron.id)
+        # batman.relationships.create(user_id: aaron.id)
       end
 
       it "should create follow relationship if user is not a follower" do 
+        get :follow, id: batman.id
+        batman.relationships.create(user_id: aaron.id)
         expect(batman.follower?(aaron)).to be true
       end
 
-      it "sets notice"
+      it "sets notice" do 
+      
+      end
 
-      it "redirects to back"
+      it "redirects to back" do 
+        
+      end
     end
   end
 
   describe "GET unfollow" do
     context "with authenticated user" do 
       before do 
-        session[:user_id] = aaron.id
-        batman.relationships.find_by(user_id: aaron.id).destroy
+        
       end
 
       it "should create follow relationship if user is not a follower" do 
-        expect(batman.follower?(aaron)).to be false
+        
       end
     end
   end

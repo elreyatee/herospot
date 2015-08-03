@@ -11,6 +11,20 @@ describe Hero do
   let(:black_adam) { Fabricate(:hero, name: "Black Adam") }
   let(:shazam) { Fabricate(:hero, name: "Shazam") }
 
+  describe "#summary" do 
+    it "returns first five sentences of biography" do 
+      expect(shazam.summary.split(".").count).to eq(5)
+    end
+
+    it "appends summary with ... if last char is not a punctuation" do 
+      expect(shazam.summary[-3..-1]).to eq("...")
+    end
+
+    it "returns up to 250 characters" do 
+      expect(shazam.summary.chars.count).to be <= 250
+    end
+  end
+
   describe "#search_by_name" do
     it "returns an empty array if there is no match" do  
       expect(Hero.search_by_name("superman")).to eq([])
