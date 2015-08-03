@@ -7,6 +7,7 @@ class HerosController < ApplicationController
   def search
     begin
       @results = Hero.search_by_name(params[:search_term]).reverse_order
+      flash[:notice] = "Sorry, no results for \" #{params[:search_term]}\" " if @results.empty?
     rescue NoMethodError
       flash[:error] = "Cannot search blank field ..."
       redirect_to :back
@@ -23,11 +24,15 @@ class HerosController < ApplicationController
 
   def follow
     hero = Hero.find(params[:id])
-    hero.relationships.create!(user_id: current_user.id)
+    hero.relationships.create!(user_id: current_user.id) unless hero.follower?(current_user)
+    flash[:notice] = "You're now following #{hero.name}!"
+    redirect_to :back
   end
 
   def unfollow
     hero = Hero.find(params[:id])
     hero.relationships.find_by(user_id: current_user.id).destroy
+    flash[:notice] = "You're no longer following #{hero.name}!"
+    redirect_to :back
   end
 end

@@ -15,4 +15,8 @@ class Hero < ActiveRecord::Base
   def follower?(some_user)
     self.followers.include?(some_user)
   end
+
+  def summary
+
+  end
 end

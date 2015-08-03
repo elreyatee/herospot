@@ -15,6 +15,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def favs 
+    @favs = current_user.following
+  end
+
   private
 
   def user_params

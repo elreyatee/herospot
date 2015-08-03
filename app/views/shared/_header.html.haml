@@ -4,6 +4,9 @@
       = link_to 'HeroSpot', root_path, class: 'navbar-brand'
     %ul.nav.navbar-nav.navbar-right
       - if logged_in?
+        %li
+          = link_to favs_user_path(current_user) do 
+            %span.glyphicon.glyphicon-star-empty
         %li= link_to 'Logout', logout_path
       - else  
         %li= link_to 'Login', login_path

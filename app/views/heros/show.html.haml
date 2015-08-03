@@ -8,8 +8,10 @@
         %p= "#{@hero.biography}"
         - if logged_in?
           = link_to 'Quiz', quiz_hero_path(@hero), class: 'btn btn-primary btn-lg'
-          = link_to 'Follow', follow_hero_path(@hero), class: 'btn btn-primary btn-lg'
-          = link_to 'Unfollow', unfollow_hero_path(@hero), class: 'btn btn-primary btn-lg' 
+          - unless @hero.follower?(current_user)
+            = link_to 'Follow', follow_hero_path(@hero), class: 'btn btn-primary btn-lg'
+          - else 
+            = link_to 'Unfollow', unfollow_hero_path(@hero), class: 'btn btn-primary btn-lg' 
 
 %section.biography
   .col-sm-8

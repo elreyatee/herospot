@@ -15,7 +15,13 @@ Rails.application.routes.draw do
   member do
     get 'quiz', to: 'heros#quiz'
     get 'follow', to: 'heros#follow'
-    get 'unfollow', to: 'hero#unfollow'
+    get 'unfollow', to: 'heros#unfollow'
+  end
+ end
+
+ resources 'users', only: [:favs] do 
+  member do 
+    get 'favs', to: 'users#favs'
   end
  end
 end

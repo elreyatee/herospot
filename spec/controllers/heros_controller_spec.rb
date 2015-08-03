@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe HerosController do 
   let(:batman) { Fabricate(:hero, name: "Batman") } 
+  let(:aaron) { Fabricate(:user, full_name: "Aaron") }
 
   describe "GET index" do  
     it "should render index page" do
@@ -14,6 +15,11 @@ describe HerosController do
     it "should set @results variable" do 
       get :search, search_term: "Batman"
       expect(assigns(:results)).to eq([batman])
+    end
+
+    it "should set notice if hero cannot be found" do 
+      get :search, search_term: "something"
+      expect(flash[:notice]).not_to be_blank
     end
 
     it "should render search page" do 
@@ -45,21 +51,32 @@ describe HerosController do
   end
 
   describe "GET follow" do
-    # it "should set follower for authenticated user" do
-      
-    # end
-    # it "should find the correct hero"
-    # it "should not set user to follow hero if user is not a follower"
-    # it "should flash message if user is already a follower"
-    
-    # context "without logged in user" do
-    #   it "should not set follower if user is not logged in" do
-    #   it "should flash message to login"
-    #   it "should redirect to log in  page"
-    # end
+    context "with authenticated user" do 
+      before do 
+        session[:user_id] = aaron.id
+        batman.relationships.create(user_id: aaron.id)
+      end
+
+      it "should create follow relationship if user is not a follower" do 
+        expect(batman.follower?(aaron)).to be true
+      end
+
+      it "sets notice"
+
+      it "redirects to back"
+    end
   end
 
   describe "GET unfollow" do
+    context "with authenticated user" do 
+      before do 
+        session[:user_id] = aaron.id
+        batman.relationships.find_by(user_id: aaron.id).destroy
+      end
 
+      it "should create follow relationship if user is not a follower" do 
+        expect(batman.follower?(aaron)).to be false
+      end
+    end
   end
 end
