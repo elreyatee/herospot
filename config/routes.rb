@@ -13,7 +13,6 @@ Rails.application.routes.draw do
   end
 
   member do
-    get 'quiz', to: 'heros#quiz'
     get 'follow', to: 'heros#follow'
     get 'unfollow', to: 'heros#unfollow'
   end

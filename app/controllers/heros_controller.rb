@@ -1,6 +1,6 @@
 class HerosController < ApplicationController
 
-  before_action :require_user, only: [:follow, :unfollow, :quiz]
+  before_action :require_user, only: [:follow, :unfollow]
 
   def index; end
 
@@ -16,10 +16,6 @@ class HerosController < ApplicationController
 
   def show
     @hero = Hero.find(params[:id])
-  end
-
-  def quiz
-
   end
 
   def follow
