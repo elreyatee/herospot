@@ -5,10 +5,8 @@ describe HerosController do
   let(:aaron) { Fabricate(:user, full_name: "Aaron") }
 
   describe "GET index" do  
-    it "should render index page" do
-      get :index
-      expect(response).to render_template(:index)
-    end
+    it "should set @heros variable" 
+    it "should render index page" 
   end
 
   describe "GET search" do

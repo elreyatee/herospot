@@ -2,7 +2,9 @@ class HerosController < ApplicationController
 
   before_action :require_user, only: [:follow, :unfollow]
 
-  def index; end
+  def index
+    @heros = Hero.sample(3)
+  end
 
   def search
     begin
