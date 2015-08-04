@@ -54,33 +54,38 @@ describe HerosController do
   describe "GET follow" do
     context "with authenticated user" do 
       before do 
-        # batman.relationships.create(user_id: aaron.id)
+        session[:user_id] = aaron.id
+        request.env['HTTP_REFERER'] = "http://localhost:3000"
       end
 
       it "should create follow relationship if user is not a follower" do 
         get :follow, id: batman.id
-        batman.relationships.create(user_id: aaron.id)
         expect(batman.follower?(aaron)).to be true
       end
 
       it "sets notice" do 
-      
+        get :follow, id: batman.id
+        expect(flash[:notice]).not_to be_blank
       end
 
       it "redirects to back" do 
-        
+        get :follow, id: batman.id
+        expect(response).to redirect_to request.env['HTTP_REFERER']
       end
     end
   end
 
   describe "GET unfollow" do
-    context "with authenticated user" do 
-      before do 
-        
-      end
+    before do 
+      session[:user_id] = aaron.id
+      request.env['HTTP_REFERER'] = "http://localhost:3000"
+    end
 
-      it "should create follow relationship if user is not a follower" do 
-        
+    context "with authenticated user" do 
+      it "should destroy follow relationship" do 
+        batman.relationships.create(user_id: aaron.id)
+        get :unfollow, id: batman.id
+        expect(batman.follower?(aaron)).to be false
       end
     end
   end
