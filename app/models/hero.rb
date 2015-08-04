@@ -21,18 +21,4 @@ class Hero < ActiveRecord::Base
     summary = self.biography.split(".")[0..4].join(".")[0..240]
     summary << "..." unless summary[-1] == "."
   end
-
-  def self.collect_ids
-    Hero.pluck(:id)
-  end
-
-  def self.sample(n = 1)
-    result = []
-
-    until result.size == n do
-      hero = Hero.find(Hero.collect_ids.sample)
-      result << hero unless result.include?(hero)
-    end
-    result
-  end
 end

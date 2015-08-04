@@ -1,12 +1,15 @@
 require 'spec_helper'
 
 describe HerosController do 
-  let(:batman) { Fabricate(:hero, name: "Batman") } 
+  let(:batman) { Fabricate(:hero, id: 1, name: "Batman") }  
   let(:aaron) { Fabricate(:user, full_name: "Aaron") }
 
   describe "GET index" do  
-    it "should set @heros variable" 
-    it "should render index page" 
+    it "should render index page" do 
+      expect(controller).to receive(:index)
+      get :index
+      expect(response).to render_template(:index)
+    end 
   end
 
   describe "GET search" do

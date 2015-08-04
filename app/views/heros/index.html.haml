@@ -5,7 +5,7 @@
 
 %section.biography
   .row
-    - @heros.each do |hero|
+    - display_heros(3).each do |hero|
       .col-sm-4
         .thumbnail
           = image_tag("#{hero.small_url}", alt: "#{hero.name}")

@@ -9,24 +9,8 @@ describe Hero do
   it { should validate_presence_of(:publisher) }
 
   let(:user) { Fabricate(:user) }
-  let(:black_adam) { Fabricate(:hero, id: 1, name: "Black Adam") }
-  let(:shazam) { Fabricate(:hero, id: 2, name: "Shazam") }
-
-  describe "#collect_ids" do 
-    it "returns an array" do 
-      expect(Hero.collect_ids).to be_kind_of(Array)
-    end
-
-    it "returns an array of all Hero uniq ids" do 
-      # expect(Hero.collect_ids).to eq([black_adam.id, shazam.id])
-    end
-  end
-
-  describe "#sample" do 
-    it "returns an array" 
-    it "returns an array of 1 hero without parameters"
-    it "returns an array of uniq heros" 
-  end
+  let(:black_adam) { Fabricate(:hero, name: "Black Adam") }
+  let(:shazam) { Fabricate(:hero, name: "Shazam") }
 
   describe "#summary" do 
     it "returns first five sentences of biography" do 
