@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby '2.2.0'
 
 gem 'bootstrap-sass'
 gem 'bootstrap_form'
@@ -20,12 +21,12 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'fabrication'
   gem 'faker'
+  gem 'capybara'
 end
 
 group :test do
   gem 'database_cleaner', '1.2.0'
   gem 'launchy'
   gem 'shoulda-matchers'
-  gem 'capybara'
 end
 
