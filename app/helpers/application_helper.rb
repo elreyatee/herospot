@@ -3,7 +3,7 @@ module ApplicationHelper
     Hero.pluck(:id)
   end
 
-  def display_heros(n)
+  def display_heros(n = 1)
     result = []
     until result.size == n do
       hero = Hero.find(collect_ids.sample)

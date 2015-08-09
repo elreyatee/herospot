@@ -5,10 +5,11 @@
 
 %section.biography
   .row
-    - display_heros(3).each do |hero|
-      .col-sm-4
-        .thumbnail
-          = image_tag("#{hero.small_url}", alt: "#{hero.name}")
-          .caption
-            %h3= "#{hero.name}" 
-            %p= "#{hero.summary}"
+    - display_heros.each do |hero|
+      = link_to hero_path(hero) do 
+        .col-sm-4
+          .thumbnail
+            = image_tag("#{hero.small_url}", alt: "#{hero.name}")
+            .caption
+              %h3= "#{hero.name}" 
+              %p= "#{hero.summary}"

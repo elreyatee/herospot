@@ -1,8 +1,12 @@
 require 'spec_helper'
 
 describe HerosController do 
+  before do 
+    set_current_user
+    set_referrer
+  end
+
   let(:batman) { Fabricate(:hero, id: 1, name: "Batman") }  
-  let(:aaron) { Fabricate(:user, full_name: "Aaron") }
 
   describe "GET index" do  
     it "should render index page" do 
@@ -29,11 +33,11 @@ describe HerosController do
     end
 
     it "should raise NoMethodError if search term is blank" do 
+      get :search, search_term: " "
       expect{ Hero.search_by_name("").reverse_order }.to raise_error(NoMethodError)
     end
 
     it "it should render back if search term is blank" do
-      request.env['HTTP_REFERER'] = "http://localhost:3000"
       get :search, search_term: " "
       expect(response).to redirect_to request.env['HTTP_REFERER']
     end
@@ -52,41 +56,26 @@ describe HerosController do
   end
 
   describe "GET follow" do
-    context "with authenticated user" do 
-      before do 
-        session[:user_id] = aaron.id
-        request.env['HTTP_REFERER'] = "http://localhost:3000"
-      end
+    before { get :follow, id: batman.id }
 
-      it "should create follow relationship if user is not a follower" do 
-        get :follow, id: batman.id
-        expect(batman.follower?(aaron)).to be true
-      end
+    it "should create follow relationship if user is not a follower" do 
+      expect(batman.follower?(current_user)).to be true
+    end
 
-      it "sets notice" do 
-        get :follow, id: batman.id
-        expect(flash[:notice]).not_to be_blank
-      end
+    it "sets notice" do 
+      expect(flash[:notice]).not_to be_blank
+    end
 
-      it "redirects to back" do 
-        get :follow, id: batman.id
-        expect(response).to redirect_to request.env['HTTP_REFERER']
-      end
+    it "redirects to back" do 
+      expect(response).to redirect_to request.env['HTTP_REFERER']
     end
   end
 
   describe "GET unfollow" do
-    before do 
-      session[:user_id] = aaron.id
-      request.env['HTTP_REFERER'] = "http://localhost:3000"
-    end
-
-    context "with authenticated user" do 
-      it "should destroy follow relationship" do 
-        batman.relationships.create(user_id: aaron.id)
-        get :unfollow, id: batman.id
-        expect(batman.follower?(aaron)).to be false
-      end
+    it "should destroy follow relationship" do 
+      batman.relationships.create(user_id: current_user.id)
+      get :unfollow, id: batman.id 
+      expect(batman.follower?(current_user)).to be false
     end
   end
 end
