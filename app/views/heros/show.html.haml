@@ -4,11 +4,8 @@
       %div.col-sm-6(id="img_wrapper")
         = image_tag(@hero.large_url, alt: "#{@hero.name}")
       %div.col-sm-6(id="char_intro")
-
-        %h2= "#{@hero.name}"
-        = button_tag class: 'btn btn-primary' do
-          Followers
-          %span.badge= "#{@hero.followers.count}"
+        = content_tag(:h1, "#{@hero.name}") 
+        = link_to "#{@hero.followers.count} Followers", class: "large"
         %p= "#{@hero.summary}"
         - if logged_in?
           - unless @hero.follower?(current_user)
