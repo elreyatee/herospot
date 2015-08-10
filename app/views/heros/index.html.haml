@@ -5,7 +5,7 @@
 
 %section.biography
   .row
-    - display_heros.each do |hero|
+    - display_heros(3).each do |hero|
       = link_to hero_path(hero) do 
         .col-sm-4
           .thumbnail
