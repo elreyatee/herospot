@@ -2,11 +2,13 @@ class HerosController < ApplicationController
 
   before_action :require_user, only: [:follow, :unfollow]
 
-  def index; end
+  def index
+    @random_heros = Hero.select_random_heros(3)
+  end
 
   def search
     begin
-      @results = Hero.search_by_name(params[:search_term]).reverse_order
+      @results = Hero.search_by_name(params[:search_term])
       flash[:notice] = "Sorry, no results for \" #{params[:search_term]}\" " if @results.empty?
     rescue NoMethodError
       flash[:error] = "Cannot search blank field ..."
