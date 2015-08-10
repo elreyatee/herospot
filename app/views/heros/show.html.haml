@@ -5,7 +5,7 @@
         = image_tag(@hero.large_url, alt: "#{@hero.name}")
       %div.col-sm-6(id="char_intro")
         = content_tag(:h1, "#{@hero.name}") 
-        = link_to "#{@hero.followers.count} Followers", class: "large"
+        = link_to "#{@hero.followers.count} Followers", class: "text-info"
         %p= "#{@hero.summary}"
         - if logged_in?
           - unless @hero.follower?(current_user)
