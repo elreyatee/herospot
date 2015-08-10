@@ -1,0 +1,9 @@
+- heros.each do |hero|
+  .media
+    .media-left.media-top
+      = link_to hero_path(hero) do
+        = image_tag(hero.small_url, size: "128x128", alt: "#{hero.name}", class: "media-object")
+    .media-body
+      %h4.media-heading= hero.name
+      %p= hero.summary
+  %hr

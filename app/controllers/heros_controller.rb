@@ -1,5 +1,4 @@
 class HerosController < ApplicationController
-
   before_action :require_user, only: [:follow, :unfollow]
   before_action :set_hero, only: [:show, :follow, :unfollow]
 
